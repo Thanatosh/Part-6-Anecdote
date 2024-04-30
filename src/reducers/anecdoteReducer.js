@@ -36,6 +36,8 @@ const reducer = (state = initialState, action) => {
         )
       }
       return state
+    case 'ADD_ANECDOTE':
+      return [...state, asObject(action.content)]
     default:
       return state
   }
