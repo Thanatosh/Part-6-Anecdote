@@ -13,7 +13,16 @@ const Anecdote = ({ anecdote, handleClick }) => {
 
 const Anecdotes = () => {
   const dispatch = useDispatch()
-  const anecdotes = useSelector(state => state)
+  const anecdotes = useSelector(state => {
+    const filter = state.filter
+    const filterText = filter ? filter.toLowerCase() : ''
+
+    return filterText
+      ? state.anecdotes.filter(anecdote =>
+          anecdote.content.toLowerCase().includes(filterText)
+        )
+      : state.anecdotes
+  })
 
   const vote = (id) => {
     console.log('vote', id)
