@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import anecdoteService from '../services/anecdotes'
-import { setNotification } from './notificationReducer'
+import { showNotification } from './notificationReducer'
 
 const { reducer, actions } = createSlice({
   name: 'anecdotes',
@@ -28,7 +28,7 @@ export const voteAnecdote = id => {
     await anecdoteService.vote(id)
     dispatch(voteSlice({ id }))
     const anecdote = await anecdoteService.getById(id)
-    dispatch(setNotification(`You voted for: ${anecdote.content}`))
+    dispatch(showNotification(`You voted for: ${anecdote.content}`, 5))
   }
 }
 
